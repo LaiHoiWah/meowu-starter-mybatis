@@ -8,7 +8,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 import java.util.List;
 
-public class MySqlBuilder implements SqlBuilder{
+public class MySqlProvider implements SqlProvider{
 
     @Override
     public String find(Criteria criteria){
