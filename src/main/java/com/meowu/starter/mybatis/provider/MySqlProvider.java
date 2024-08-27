@@ -1,4 +1,4 @@
-package com.meowu.starter.mybatis.builder;
+package com.meowu.starter.mybatis.provider;
 
 import com.meowu.starter.commons.utils.CollectionUtils;
 import com.meowu.starter.commons.utils.ObjectUtils;
