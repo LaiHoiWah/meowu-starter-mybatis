@@ -22,4 +22,7 @@ public interface Operator{
     String LIMIT    = "LIMIT";
     String ORDER_BY = "ORDER BY";
     String GROUP_BY = "GROUP BY";
+
+    // function
+    String COUNT = "COUNT";
 }

@@ -11,4 +11,6 @@ public enum ValueType{
     MULTIPLE,
 
     CRITERION,
+
+    FUNCTION,
 }

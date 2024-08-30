@@ -1,13 +1,15 @@
 package com.meowu.starter.mybatis.criteria;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Criterion{
 
-    private String field;
+    private String column;
     private String operator;
     private Object value;
     private ValueType valueType;
