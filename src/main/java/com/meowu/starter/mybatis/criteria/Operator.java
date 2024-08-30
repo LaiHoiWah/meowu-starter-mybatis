@@ -14,4 +14,7 @@ public interface Operator{
     String NOT_BETWEEN           = "NOT BETWEEN";
     String IN                    = "IN";
     String NOT_IN                = "NOT IN";
+
+    String AND = "AND";
+    String OR  = "OR";
 }
