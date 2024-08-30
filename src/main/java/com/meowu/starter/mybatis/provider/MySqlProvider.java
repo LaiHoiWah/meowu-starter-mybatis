@@ -2,6 +2,7 @@ package com.meowu.starter.mybatis.provider;
 
 import com.meowu.starter.commons.utils.CollectionUtils;
 import com.meowu.starter.commons.utils.ObjectUtils;
+import com.meowu.starter.commons.utils.StringUtils;
 import com.meowu.starter.mybatis.criteria.Criteria;
 import com.meowu.starter.mybatis.criteria.Criterion;
 import org.apache.ibatis.jdbc.SQL;
@@ -14,9 +15,6 @@ public class MySqlProvider implements SqlProvider{
     public String find(Criteria criteria){
         SQL sql = new SQL();
 
-        // table name
-        sql.FROM(criteria.getTableName());
-
         // select
         List<Criterion> selects = criteria.getSelects();
         if(CollectionUtils.isNotEmpty(selects)){
@@ -27,6 +25,12 @@ public class MySqlProvider implements SqlProvider{
                     """;
 
             sql.SELECT(script);
+        }
+
+        // table name
+        String tableName = criteria.getTableName();
+        if(StringUtils.isNotBlank(tableName)){
+            sql.FROM(tableName);
         }
 
         // where
@@ -94,6 +98,18 @@ public class MySqlProvider implements SqlProvider{
             sql.WHERE(script);
         }
 
+        // group by
+        Criterion groupBy = criteria.getGroupBy();
+        if(ObjectUtils.isNotNull(groupBy)){
+            String script = """
+                        <foreach collection="criteria.groupBy.value" item="group" separator=",">
+                            ${group}
+                        </foreach>
+                    """;
+
+            sql.GROUP_BY(script);
+        }
+
         // order by
         Criterion orderBy = criteria.getOrderBy();
         if(ObjectUtils.isNotNull(orderBy)){
@@ -116,18 +132,6 @@ public class MySqlProvider implements SqlProvider{
                     """;
 
             sql.LIMIT(script);
-        }
-
-        // group by
-        Criterion groupBy = criteria.getGroupBy();
-        if(ObjectUtils.isNotNull(groupBy)){
-            String script = """
-                        <foreach collection="criteria.groupBy.value" item="group" separator=",">
-                            ${group}
-                        </foreach>
-                    """;
-
-            sql.GROUP_BY(script);
         }
 
         return "<script>" + sql.toString() + "</script>";
