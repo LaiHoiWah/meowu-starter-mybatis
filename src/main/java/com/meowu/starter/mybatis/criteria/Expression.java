@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Criterion{
+public class Expression<T>{
 
-    private String field;
-    private String operator;
-    private Object value;
+    private T value;
 }
