@@ -179,8 +179,8 @@ public class Restrictions{
         return criterion;
     }
 
-    public static Criterion count(Function<?, ?>... getters){
-        return count(Arrays.stream(getters).map(FieldUtils::getColumnName).toArray(String[]::new));
+    public static Criterion count(){
+        return count("*");
     }
 
     public static Criterion count(String... columns){
@@ -192,10 +192,6 @@ public class Restrictions{
         criterion.setValueType(ValueType.FUNCTION);
 
         return criterion;
-    }
-
-    public static Criterion groupBy(Function<?, ?>... getters){
-        return groupBy(Arrays.stream(getters).map(FieldUtils::getColumnName).toArray(String[]::new));
     }
 
     public static Criterion groupBy(String... columns){
