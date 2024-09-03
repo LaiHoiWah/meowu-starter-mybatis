@@ -9,16 +9,13 @@ public class MySqlProvider implements SqlProvider{
         return """
                 <script>
                     SELECT
-                    <foreach collection="selects" item="criterion" separator=",">
+                    <foreach collection="selects" item="select" separator=",">
                         <choose>
-                            <when test="criterion.valueType.name == 'FUNCTION'">
-                                ${criterion.operator}
-                                <foreach collection="criterion.value" item="value" open="(" close=")" separator=",">
-                                    #{value}
-                                </foreach>
-                            </when>
-                            <when test="criterion.valueType.name == 'NONE'">
-                                ${criterion.column}
+                            <when test="select instanceof Selection">
+                                ${select}
+                                <if test="select.alias != null and select.alias.equals('')">
+                                    as #{select.alias}
+                                </if>
                             </when>
                         </choose>
                     </foreach>

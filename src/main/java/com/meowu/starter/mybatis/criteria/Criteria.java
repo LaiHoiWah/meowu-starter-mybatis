@@ -2,7 +2,7 @@ package com.meowu.starter.mybatis.criteria;
 
 import com.google.common.collect.Lists;
 import com.meowu.starter.commons.utils.ArrayUtils;
-import com.meowu.starter.commons.utils.CollectionUtils;
+import com.meowu.starter.mybatis.expression.Selection;
 import lombok.Getter;
 
 import java.util.Arrays;
