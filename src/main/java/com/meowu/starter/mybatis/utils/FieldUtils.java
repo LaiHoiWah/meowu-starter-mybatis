@@ -16,11 +16,10 @@ public class FieldUtils{
 
         TableName annotation = classOf.getAnnotation(TableName.class);
 
-        if(annotation == null){
+        if(annotation == null || StringUtils.isBlank(annotation.value())){
             return StringUtils.lowerCase(classOf.getName());
         }else{
-            String tableName = annotation.value();
-            return StringUtils.isBlank(tableName) ? StringUtils.lowerCase(classOf.getName()) : tableName;
+            return annotation.value();
         }
     }
 
@@ -30,11 +29,10 @@ public class FieldUtils{
         Field field = ReflectionUtils.getField(getter);
         ColumnName annotation = field.getAnnotation(ColumnName.class);
 
-        if(annotation == null){
+        if(annotation == null || StringUtils.isBlank(annotation.value())){
             return StringUtils.camelToUnderscoreCase(field.getName());
         }else{
-            String columnName = annotation.value();
-            return StringUtils.isBlank(columnName) ? StringUtils.camelToUnderscoreCase(field.getName()) : columnName;
+            return annotation.value();
         }
     }
 }

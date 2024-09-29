@@ -1,16 +1,12 @@
-package com.meowu.starter.mybatis.expression;
+package com.meowu.starter.mybatis.criteria.expression;
 
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Setter
 public class Selection{
 
     private String field;
     private String alias;
-
-    public Selection(){
-
-    }
 
     public Selection(String field){
         this.field = field;

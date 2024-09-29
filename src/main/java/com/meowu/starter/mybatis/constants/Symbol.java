@@ -1,4 +1,4 @@
-package com.meowu.starter.mybatis.criteria;
+package com.meowu.starter.mybatis.constants;
 
 public interface Symbol{
 

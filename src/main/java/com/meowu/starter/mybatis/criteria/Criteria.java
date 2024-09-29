@@ -1,8 +1,9 @@
 package com.meowu.starter.mybatis.criteria;
 
 import com.google.common.collect.Lists;
-import com.meowu.starter.commons.utils.ArrayUtils;
-import com.meowu.starter.mybatis.expression.Selection;
+import com.meowu.starter.mybatis.criteria.expression.Criterion;
+import com.meowu.starter.mybatis.criteria.expression.Selection;
+import com.meowu.starter.mybatis.utils.FieldUtils;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -11,28 +12,33 @@ import java.util.List;
 @Getter
 public class Criteria{
 
-    private final List<Selection> selects    = Lists.newArrayList();
-    private final List<Criterion> conditions = Lists.newArrayList();
+    private String tableName;
 
-    public Criteria selects(Selection... selectors){
-        if(ArrayUtils.isNotEmpty(selectors)){
-            this.selects.addAll(Arrays.stream(selectors).toList());
-        }
-        return this;
+    private final List<Selection> selections;
+    private final List<Criterion> conditions;
+
+    public Criteria(){
+        this.selections = Lists.newArrayList();
+        this.conditions = Lists.newArrayList();
     }
 
-    public Criteria where(Criterion... conditions){
-        if(ArrayUtils.isNotEmpty(conditions)){
-            this.conditions.addAll(Arrays.stream(conditions).toList());
-        }
-        return this;
+    public void from(Class<?> fromType){
+        this.tableName = FieldUtils.getTableName(fromType);
     }
 
-    public void clearSelects(){
-        this.selects.clear();
+    public void select(Selection... selections){
+        this.selections.addAll(Arrays.asList(selections));
     }
 
-    public void clearConditions(){
+    public void where(Criterion... conditions){
+        this.conditions.addAll(Arrays.asList(conditions));
+    }
+
+    public void clearSelect(){
+        this.selections.clear();
+    }
+
+    public void clearCondition(){
         this.conditions.clear();
     }
 }
