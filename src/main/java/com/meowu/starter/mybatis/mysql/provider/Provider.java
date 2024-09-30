@@ -9,7 +9,19 @@ public class Provider{
             """
             <script>
                 SELECT
-                    *
+                    <choose>
+                        <when test="selections.isEmpty()">
+                            *
+                        </when>
+                        <when>
+                            <foreach collection="selections" item="selection" separator=",">
+                                ${selection.field}
+                                <if test="selection.alias != null and selection.alias != ''">
+                                    AS #{selection.alias}
+                                </if>
+                            </foreach>
+                        </when>
+                    </choose>
                 FROM
                     ${tableName}
                 <where>
@@ -32,7 +44,7 @@ public class Provider{
                                         </foreach>
                                     </if>
                                 </when>
-                                <when test="criterion.criterionType == 'CRITERION'>
+                                <when test="criterion.criterionType == 'CRITERION'">
                                     <foreach collection="criterion.value" item="item" open="(" close=")" separator="criterion.operator">
                                         <trim prefix="(" suffix=")">
                                             <choose>

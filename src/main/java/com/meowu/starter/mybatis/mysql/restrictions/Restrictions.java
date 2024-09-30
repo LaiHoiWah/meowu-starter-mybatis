@@ -170,4 +170,22 @@ public class Restrictions{
         criterion.setValueType(ValueType.SINGLE);
         return criterion;
     }
+
+    public static Criterion and(Criterion... conditions){
+        Criterion criterion = new Criterion();
+        criterion.setValue(conditions);
+        criterion.setOperator(Operator.AND);
+        criterion.setCriterionType(CriterionType.CRITERION);
+        criterion.setValueType(ValueType.MULTIPLE);
+        return criterion;
+    }
+
+    public static Criterion or(Criterion... conditions){
+        Criterion criterion = new Criterion();
+        criterion.setValue(conditions);
+        criterion.setOperator(Operator.OR);
+        criterion.setCriterionType(CriterionType.CRITERION);
+        criterion.setValueType(ValueType.MULTIPLE);
+        return criterion;
+    }
 }
